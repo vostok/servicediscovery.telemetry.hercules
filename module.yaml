@@ -1,4 +1,9 @@
 notests *default:
+  deps:
+    - vostok.hercules.client.abstractions
+    - vostok.servicediscovery.telemetry@initial_models
+    - vostok.devtools
+
   build:
     target: Vostok.ServiceDiscovery.Telemetry.Hercules.sln
     configuration: NoTests
@@ -7,9 +12,6 @@ notests *default:
 
   install:
     - Vostok.ServiceDiscovery.Telemetry.Hercules/bin/Release/netstandard2.0/Vostok.ServiceDiscovery.Telemetry.Hercules.dll
-
-  deps:
-    - vostok.devtools
 
 full-build > notests:
   build:
