@@ -5,8 +5,7 @@ using Vostok.ServiceDiscovery.Telemetry.Event;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
-    [PublicAPI]
-    public static class HerculesServiceDiscoveryEventBuilder
+    internal static class HerculesServiceDiscoveryEventBuilder
     {
         public static void Build([NotNull] ServiceDiscoveryEvent serviceDiscoveryEvent, [NotNull] IHerculesEventBuilder herculesEventBuilder) =>
             throw new NotImplementedException();
