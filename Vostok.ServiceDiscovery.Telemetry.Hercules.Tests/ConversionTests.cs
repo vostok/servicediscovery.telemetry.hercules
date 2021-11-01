@@ -12,9 +12,12 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
         [Test]
         public void Should_correctly_convert_to_hercules_event()
         {
-            var sdEvent = new ServiceDiscoveryEvent("app", "replica", ServiceDiscoveryEventKind.ReplicaStart, 
-                timestamp: DateTimeOffset.Now, 
-                properties: new Dictionary<string, string> { {"prop1","val1"}, {"prop2", "val2"}});
+            var sdEvent = new ServiceDiscoveryEvent("app",
+                "replica",
+                "env",
+                ServiceDiscoveryEventKind.ReplicaStart,
+                DateTimeOffset.Now,
+                new Dictionary<string, string> {{"prop1", "val1"}, {"prop2", "val2"}});
 
             var herculesEvent = HerculesServiceDiscoveryEventFactory.To(sdEvent);
             var parsedSdEvent = HerculesServiceDiscoveryEventFactory.From(herculesEvent);

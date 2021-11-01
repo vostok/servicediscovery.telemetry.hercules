@@ -27,8 +27,8 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
             return new ServiceDiscoveryEvent(
                 herculesEvent.Tags[Tags.Application]?.AsString,
                 herculesEvent.Tags[Tags.Replica]?.AsString,
-                eventKind,
                 herculesEvent.Tags[Tags.Environment]?.AsString,
+                eventKind,
                 herculesEvent.Timestamp,
                 properties);
         }
