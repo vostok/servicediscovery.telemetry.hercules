@@ -1,6 +1,6 @@
 # Vostok.ServiceDiscovery.Telemetry.Hercules
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/vostok/servicediscovery.telemetry.hercules?svg=true&branch=master)](https://ci.appveyor.com/project/vostok/servicediscovery.telemetry.hercules/branch/master)
+[![Build & Test](https://github.com/vostok/servicediscovery.telemetry.hercules/actions/workflows/ci.yml/badge.svg)](https://github.com/vostok/servicediscovery.telemetry.hercules/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Vostok.ServiceDiscovery.Telemetry.Hercules.svg)](https://www.nuget.org/packages/Vostok.ServiceDiscovery.Telemetry.Hercules)
 
 
