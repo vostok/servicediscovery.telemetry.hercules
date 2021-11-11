@@ -24,7 +24,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
         public async Task<IList<ServiceDiscoveryEvent>> ReadAsync(TimeSpan timeout, CancellationToken cancellationToken = new CancellationToken())
         {
             var query = new ReadStreamQuery(settings.StreamName) {Coordinates = coordinates};
-            var readResult = await settings.HerculesStreamClient.ReadAsync(query, timeout, cancellationToken);
+            var readResult = await settings.HerculesStreamClient.ReadAsync(query, timeout, cancellationToken).ConfigureAwait(false);
             readResult.EnsureSuccess();
 
             coordinates = readResult.Payload.Next;
