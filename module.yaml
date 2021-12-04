@@ -1,5 +1,6 @@
 notests *default:
   deps:
+    - vostok.logging.abstractions
     - vostok.hercules.client.abstractions
     - vostok.servicediscovery.telemetry@initial_models
     - vostok.devtools
