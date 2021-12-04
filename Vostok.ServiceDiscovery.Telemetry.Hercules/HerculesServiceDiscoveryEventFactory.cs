@@ -3,9 +3,13 @@ using System.Linq;
 using JetBrains.Annotations;
 using Vostok.Hercules.Client.Abstractions.Events;
 using Vostok.ServiceDiscovery.Telemetry.Event;
+using Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
+    /// <summary>
+    /// Converts <see cref="HerculesEvent"/>s written by <see cref="HerculesServiceDiscoveryEventSender"/> back to <see cref="ServiceDiscoveryEvent"/>s.
+    /// </summary>
     [PublicAPI]
     public static class HerculesServiceDiscoveryEventFactory
     {

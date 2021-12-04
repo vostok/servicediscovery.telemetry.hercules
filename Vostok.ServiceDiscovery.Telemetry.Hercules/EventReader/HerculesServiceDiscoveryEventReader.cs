@@ -4,13 +4,20 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Vostok.Hercules.Client.Abstractions;
 using Vostok.Hercules.Client.Abstractions.Models;
 using Vostok.Hercules.Client.Abstractions.Queries;
+using Vostok.Hercules.Client.Abstractions.Results;
 using Vostok.Logging.Abstractions;
 using Vostok.ServiceDiscovery.Telemetry.Event;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
 {
+    /// <summary>
+    /// <para><see cref="HerculesServiceDiscoveryEventReader"/> that allows you to read events
+    /// using the <see cref="IHerculesStreamClient"/> transmitted in the <see cref="HerculesServiceDiscoveryEventReaderSettings"/>.</para>
+    /// <para>Reading events starts from the <see cref="HerculesServiceDiscoveryEventReaderSettings.Coordinates"/>, subsequent readings automatically move the coordinates.</para>
+    /// </summary>
     [PublicAPI]
     public class HerculesServiceDiscoveryEventReader
     {
@@ -25,6 +32,11 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
             coordinates = this.settings.Coordinates;
         }
 
+        /// <summary>
+        /// <para>Reads <see cref="ServiceDiscoveryEvent"/>s using the <see cref="HerculesServiceDiscoveryEventReaderSettings.HerculesStreamClient"/>.
+        /// See <see cref="IHerculesStreamClient{T}.ReadAsync"/> for details.</para>
+        /// <para>Return <b>Null</b> if reading unsuccessful (<see cref="HerculesStatus"/>).</para>
+        /// </summary>
         [ItemCanBeNull]
         public async Task<IList<ServiceDiscoveryEvent>> ReadAsync(TimeSpan timeout, CancellationToken cancellationToken = new CancellationToken())
         {
