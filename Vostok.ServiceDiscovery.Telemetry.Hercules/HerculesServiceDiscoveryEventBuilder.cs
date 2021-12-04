@@ -1,7 +1,6 @@
 ﻿using JetBrains.Annotations;
 using Vostok.Hercules.Client.Abstractions.Events;
 using Vostok.ServiceDiscovery.Telemetry.Event;
-using Tags = Vostok.ServiceDiscovery.Telemetry.Hercules.HerculesServiceDiscoveryEventKeys;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
@@ -11,12 +10,12 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
         {
             herculesEventBuilder.SetTimestamp(serviceDiscoveryEvent.Timestamp);
 
-            herculesEventBuilder.AddValue(Tags.Application, serviceDiscoveryEvent.Application);
-            herculesEventBuilder.AddValue(Tags.Environment, serviceDiscoveryEvent.Environment);
-            herculesEventBuilder.AddValue(Tags.Replica, serviceDiscoveryEvent.Replica);
-            herculesEventBuilder.AddValue(Tags.ServiceDiscoveryEventKind, serviceDiscoveryEvent.ServiceDiscoveryEventKind.ToString());
+            herculesEventBuilder.AddValue(TagNames.Application, serviceDiscoveryEvent.Application);
+            herculesEventBuilder.AddValue(TagNames.Environment, serviceDiscoveryEvent.Environment);
+            herculesEventBuilder.AddValue(TagNames.Replica, serviceDiscoveryEvent.Replica);
+            herculesEventBuilder.AddValue(TagNames.ServiceDiscoveryEventKind, serviceDiscoveryEvent.Kind.ToString());
 
-            herculesEventBuilder.AddContainer(Tags.Properties,
+            herculesEventBuilder.AddContainer(TagNames.Properties,
                 builder =>
                 {
                     foreach (var property in serviceDiscoveryEvent.Properties)
