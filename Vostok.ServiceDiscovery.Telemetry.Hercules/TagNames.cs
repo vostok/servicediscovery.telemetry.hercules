@@ -1,6 +1,6 @@
 ﻿namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
-    internal static class HerculesServiceDiscoveryEventKeys
+    internal static class TagNames
     {
         public const string Application = "application";
         public const string Environment = "environment";

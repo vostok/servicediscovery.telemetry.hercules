@@ -13,17 +13,17 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
         private static readonly DateTimeOffset Timestamp = DateTimeOffset.UtcNow;
 
         private readonly ServiceDiscoveryEvent serviceDiscoveryEvent = new ServiceDiscoveryEvent(
+            ServiceDiscoveryEventKind.ReplicaStarted,
+            "default",
             "vostok",
             "https://github.com/vostok",
-            "default",
-            ServiceDiscoveryEventKind.ReplicaStart,
             Timestamp,
-            new Dictionary<string, string>() {{ServiceDiscoveryEventKeys.EventDescription, "test"}});
+            new Dictionary<string, string>() {{ServiceDiscoveryWellKnownProperties.Description, "test"}});
 
         [Test]
         public void Should_correctly_convert_to_hercules_event()
         {
-            var herculesTagKeys = typeof(HerculesServiceDiscoveryEventKeys).GetFields().Select(info => (string)info.GetValue(null)).ToArray();
+            var herculesTagKeys = typeof(TagNames).GetFields().Select(info => (string)info.GetValue(null)).ToArray();
 
             var herculesEvent = HerculesServiceDiscoveryEventFactory.To(serviceDiscoveryEvent);
 
@@ -31,7 +31,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
             herculesEvent.Tags.Keys.Should().BeEquivalentTo(herculesTagKeys);
             herculesEvent.Tags.Values.Should().NotContainNulls();
         }
-        
+
         [Test]
         public void Should_correctly_convert_from_hercules_event()
         {

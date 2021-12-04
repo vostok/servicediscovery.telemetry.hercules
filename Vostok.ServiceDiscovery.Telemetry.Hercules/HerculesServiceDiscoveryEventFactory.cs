@@ -3,9 +3,6 @@ using System.Linq;
 using JetBrains.Annotations;
 using Vostok.Hercules.Client.Abstractions.Events;
 using Vostok.ServiceDiscovery.Telemetry.Event;
-using Tags = Vostok.ServiceDiscovery.Telemetry.Hercules.HerculesServiceDiscoveryEventKeys;
-
-// ReSharper disable AssignNullToNotNullAttribute
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
@@ -15,22 +12,20 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
         [NotNull]
         public static ServiceDiscoveryEvent From([NotNull] HerculesEvent herculesEvent)
         {
-            var eventKind = Enum.TryParse<ServiceDiscoveryEventKind>(herculesEvent.Tags[Tags.ServiceDiscoveryEventKind]?.AsString, out var kind)
+            var _ = Enum.TryParse<ServiceDiscoveryEventKind>(herculesEvent.Tags[TagNames.ServiceDiscoveryEventKind]?.AsString, out var kind)
                 ? kind
-                : throw new ArgumentException(Tags.ServiceDiscoveryEventKind);
-
-            var properties = herculesEvent.Tags[Tags.Properties]
+                : throw new ArgumentException(nameof(TagNames.ServiceDiscoveryEventKind));
+            var properties = herculesEvent.Tags[TagNames.Properties]
                 ?.AsContainer
-                .ToDictionary(tag => tag.Key,
-                    tag => tag.Value.AsString);
+                .ToDictionary(tag => tag.Key, tag => tag.Value.AsString);
 
             return new ServiceDiscoveryEvent(
-                herculesEvent.Tags[Tags.Application]?.AsString,
-                herculesEvent.Tags[Tags.Replica]?.AsString,
-                herculesEvent.Tags[Tags.Environment]?.AsString,
-                eventKind,
+                kind,
+                herculesEvent.Tags[TagNames.Environment]?.AsString ?? throw new ArgumentException(nameof(TagNames.Environment)),
+                herculesEvent.Tags[TagNames.Application]?.AsString ?? throw new ArgumentException(nameof(TagNames.Application)),
+                herculesEvent.Tags[TagNames.Replica]?.AsString ?? throw new ArgumentException(nameof(TagNames.Replica)),
                 herculesEvent.Timestamp,
-                properties);
+                properties ?? throw new ArgumentException(nameof(TagNames.Properties)));
         }
 
         [NotNull]
