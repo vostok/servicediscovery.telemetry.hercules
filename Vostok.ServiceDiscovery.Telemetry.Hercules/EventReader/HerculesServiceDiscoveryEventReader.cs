@@ -14,11 +14,12 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
     public class HerculesServiceDiscoveryEventReader
     {
         private readonly HerculesServiceDiscoveryEventReaderSettings settings;
-        private StreamCoordinates coordinates = StreamCoordinates.Empty;
+        private StreamCoordinates coordinates;
 
         public HerculesServiceDiscoveryEventReader([NotNull] HerculesServiceDiscoveryEventReaderSettings settings)
         {
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
+            coordinates = this.settings.Coordinates;
         }
 
         public async Task<IList<ServiceDiscoveryEvent>> ReadAsync(TimeSpan timeout, CancellationToken cancellationToken = new CancellationToken())

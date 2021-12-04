@@ -1,6 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Vostok.Hercules.Client.Abstractions;
+using Vostok.Hercules.Client.Abstractions.Models;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
 {
@@ -15,5 +16,8 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
 
         [NotNull]
         public string StreamName { get; set; } = "serviceDiscovery_event";
+
+        [NotNull]
+        public StreamCoordinates Coordinates { get; set; } = StreamCoordinates.Empty;
     }
 }
