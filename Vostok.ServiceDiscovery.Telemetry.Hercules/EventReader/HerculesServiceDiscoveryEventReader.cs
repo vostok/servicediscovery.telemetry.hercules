@@ -25,7 +25,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
         private readonly HerculesServiceDiscoveryEventReaderSettings settings;
         private readonly ILog log;
 
-        public HerculesServiceDiscoveryEventReader([NotNull] HerculesServiceDiscoveryEventReaderSettings settings, ILog log)
+        public HerculesServiceDiscoveryEventReader([NotNull] HerculesServiceDiscoveryEventReaderSettings settings, [CanBeNull] ILog log = null)
         {
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
             this.log = (log ?? LogProvider.Get()).ForContext<HerculesServiceDiscoveryEventReader>();
@@ -34,7 +34,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
 
         /// <summary>
         /// <para>Reads <see cref="ServiceDiscoveryEvent"/>s using the <see cref="HerculesServiceDiscoveryEventReaderSettings.HerculesStreamClient"/>.
-        /// See <see cref="IHerculesStreamClient{T}.ReadAsync"/> for details.</para>
+        /// See <see cref="IHerculesStreamClient.ReadAsync"/> for details.</para>
         /// <para>Return <b>Null</b> if reading unsuccessful (<see cref="HerculesStatus"/>).</para>
         /// </summary>
         [ItemCanBeNull]
