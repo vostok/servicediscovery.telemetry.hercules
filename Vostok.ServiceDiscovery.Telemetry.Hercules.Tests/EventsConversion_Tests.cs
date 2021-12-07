@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
+using Vostok.Hercules.Client.Abstractions.Events;
 using Vostok.ServiceDiscovery.Telemetry.Event;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
@@ -18,14 +19,20 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
             "vostok",
             "https://github.com/vostok",
             Timestamp,
-            new Dictionary<string, string>() {{ServiceDiscoveryEventWellKnownProperties.Description, "test"}});
+            new Dictionary<string, string> {{ServiceDiscoveryEventWellKnownProperties.Description, "test"}});
+        private HerculesEventBuilder builder;
+
+        [SetUp]
+        public void SetUp() =>
+            builder = new HerculesEventBuilder();
 
         [Test]
         public void Should_correctly_convert_to_hercules_event()
         {
             var herculesTagKeys = typeof(TagNames).GetFields().Select(info => (string)info.GetValue(null)).ToArray();
 
-            var herculesEvent = HerculesServiceDiscoveryEventsFactory.To(serviceDiscoveryEvent);
+            HerculesServiceDiscoveryEventsBuilder.Build(serviceDiscoveryEvent, builder);
+            var herculesEvent = builder.BuildEvent();
 
             herculesEvent.Timestamp.Should().Be(Timestamp);
             herculesEvent.Tags.Keys.Should().BeEquivalentTo(herculesTagKeys);
@@ -35,7 +42,8 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
         [Test]
         public void Should_correctly_convert_from_hercules_event()
         {
-            var herculesEvent = HerculesServiceDiscoveryEventsFactory.To(serviceDiscoveryEvent);
+            HerculesServiceDiscoveryEventsBuilder.Build(serviceDiscoveryEvent, builder);
+            var herculesEvent = builder.BuildEvent();
             var parsedEvent = HerculesServiceDiscoveryEventsFactory.From(herculesEvent);
 
             parsedEvent.Should().BeEquivalentTo(serviceDiscoveryEvent);
