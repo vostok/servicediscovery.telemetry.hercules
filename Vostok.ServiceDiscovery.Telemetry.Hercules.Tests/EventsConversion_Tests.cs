@@ -18,7 +18,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
             "vostok",
             "https://github.com/vostok",
             Timestamp,
-            new Dictionary<string, string>() {{ServiceDiscoveryWellKnownProperties.Description, "test"}});
+            new Dictionary<string, string>() {{ServiceDiscoveryEventWellKnownProperties.Description, "test"}});
 
         [Test]
         public void Should_correctly_convert_to_hercules_event()
