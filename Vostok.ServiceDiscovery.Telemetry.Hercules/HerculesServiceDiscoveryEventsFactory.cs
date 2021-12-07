@@ -8,10 +8,10 @@ using Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender;
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
     /// <summary>
-    /// Converts <see cref="HerculesEvent"/>s written by <see cref="HerculesServiceDiscoveryEventSender"/> back to <see cref="ServiceDiscoveryEvent"/>s.
+    /// Converts <see cref="HerculesEvent"/>s written by <see cref="HerculesServiceDiscoveryEventsSender"/> back to <see cref="ServiceDiscoveryEvent"/>s.
     /// </summary>
     [PublicAPI]
-    public static class HerculesServiceDiscoveryEventFactory
+    public static class HerculesServiceDiscoveryEventsFactory
     {
         [NotNull]
         public static ServiceDiscoveryEvent From([NotNull] HerculesEvent herculesEvent)
@@ -35,7 +35,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
         public static HerculesEvent To([NotNull] ServiceDiscoveryEvent serviceDiscoveryEvent)
         {
             var builder = new HerculesEventBuilder();
-            HerculesServiceDiscoveryEventBuilder.Build(serviceDiscoveryEvent, builder);
+            HerculesServiceDiscoveryEventsBuilder.Build(serviceDiscoveryEvent, builder);
             return builder.BuildEvent();
         }
     }

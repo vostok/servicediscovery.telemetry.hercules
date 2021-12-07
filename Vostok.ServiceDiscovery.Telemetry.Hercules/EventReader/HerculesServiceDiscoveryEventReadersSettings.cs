@@ -7,12 +7,12 @@ using Vostok.ServiceDiscovery.Telemetry.Event;
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
 {
     /// <summary>
-    /// Represents configuration of <see cref="HerculesServiceDiscoveryEventReader"/>.
+    /// Represents configuration of <see cref="HerculesServiceDiscoveryEventsReader"/>.
     /// </summary>
     [PublicAPI]
-    public class HerculesServiceDiscoveryEventReaderSettings
+    public class HerculesServiceDiscoveryEventReadersSettings
     {
-        public HerculesServiceDiscoveryEventReaderSettings([NotNull] IHerculesStreamClient herculesStreamClient) =>
+        public HerculesServiceDiscoveryEventReadersSettings([NotNull] IHerculesStreamClient herculesStreamClient) =>
             HerculesStreamClient = herculesStreamClient ?? throw new ArgumentNullException(nameof(herculesStreamClient));
 
         /// <summary>
