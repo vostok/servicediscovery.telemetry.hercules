@@ -16,9 +16,8 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
         [NotNull]
         public static ServiceDiscoveryEvent From([NotNull] HerculesEvent herculesEvent)
         {
-            var _ = Enum.TryParse<ServiceDiscoveryEventKind>(herculesEvent.Tags[TagNames.ServiceDiscoveryEventKind]?.AsString, out var kind)
-                ? kind
-                : throw new ArgumentException(nameof(TagNames.ServiceDiscoveryEventKind));
+            if (Enum.TryParse<ServiceDiscoveryEventKind>(herculesEvent.Tags[TagNames.ServiceDiscoveryEventKind]?.AsString, out var kind))
+                throw new ArgumentException(nameof(TagNames.ServiceDiscoveryEventKind));
             var properties = herculesEvent.Tags[TagNames.Properties]
                 ?.AsContainer
                 .ToDictionary(tag => tag.Key, tag => tag.Value.AsString);
