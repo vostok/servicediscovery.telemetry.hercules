@@ -13,7 +13,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
             herculesEventBuilder.AddValue(TagNames.Application, serviceDiscoveryEvent.Application);
             herculesEventBuilder.AddValue(TagNames.Environment, serviceDiscoveryEvent.Environment);
             herculesEventBuilder.AddValue(TagNames.Replica, serviceDiscoveryEvent.Replica);
-            herculesEventBuilder.AddValue(TagNames.ServiceDiscoveryEventKind, serviceDiscoveryEvent.Kind.ToString());
+            herculesEventBuilder.AddValue(TagNames.Kind, serviceDiscoveryEvent.Kind.ToString());
 
             herculesEventBuilder.AddContainer(TagNames.Properties,
                 builder =>

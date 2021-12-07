@@ -3,7 +3,6 @@ using System.Linq;
 using JetBrains.Annotations;
 using Vostok.Hercules.Client.Abstractions.Events;
 using Vostok.ServiceDiscovery.Telemetry.Event;
-using Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
@@ -16,8 +15,8 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
         [NotNull]
         public static ServiceDiscoveryEvent From([NotNull] HerculesEvent herculesEvent)
         {
-            if (!Enum.TryParse<ServiceDiscoveryEventKind>(herculesEvent.Tags[TagNames.ServiceDiscoveryEventKind]?.AsString, out var kind))
-                throw new ArgumentException(nameof(TagNames.ServiceDiscoveryEventKind));
+            if (!Enum.TryParse<ServiceDiscoveryEventKind>(herculesEvent.Tags[TagNames.Kind]?.AsString, out var kind))
+                throw new ArgumentException(nameof(TagNames.Kind));
             var properties = herculesEvent.Tags[TagNames.Properties]
                 ?.AsContainer
                 .ToDictionary(tag => tag.Key, tag => tag.Value.AsString);
@@ -29,14 +28,6 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
                 herculesEvent.Tags[TagNames.Replica]?.AsString ?? throw new ArgumentException(nameof(TagNames.Replica)),
                 herculesEvent.Timestamp,
                 properties ?? throw new ArgumentException(nameof(TagNames.Properties)));
-        }
-
-        [NotNull]
-        public static HerculesEvent To([NotNull] ServiceDiscoveryEvent serviceDiscoveryEvent)
-        {
-            var builder = new HerculesEventBuilder();
-            HerculesServiceDiscoveryEventsBuilder.Build(serviceDiscoveryEvent, builder);
-            return builder.BuildEvent();
         }
     }
 }

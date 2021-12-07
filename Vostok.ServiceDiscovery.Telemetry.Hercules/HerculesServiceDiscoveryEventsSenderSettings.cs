@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using Vostok.Hercules.Client.Abstractions;
 using Vostok.ServiceDiscovery.Telemetry.Event;
 
-namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender
+namespace Vostok.ServiceDiscovery.Telemetry.Hercules
 {
     /// <summary>
     /// Represents configuration of <see cref="HerculesServiceDiscoveryEventsSender"/>.
@@ -11,8 +11,11 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender
     [PublicAPI]
     public class HerculesServiceDiscoveryEventsSenderSettings
     {
-        public HerculesServiceDiscoveryEventsSenderSettings([NotNull] IHerculesSink herculesSink) =>
+        public HerculesServiceDiscoveryEventsSenderSettings([NotNull] IHerculesSink herculesSink, [NotNull] string streamName)
+        {
             HerculesSink = herculesSink ?? throw new ArgumentNullException(nameof(herculesSink));
+            StreamName = streamName ?? throw new ArgumentNullException(nameof(streamName));
+        }
 
         /// <summary>
         /// <see cref="IHerculesSink"/> used to emit events.
@@ -24,6 +27,6 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender
         /// Name of the Hercules stream to use for emit <see cref="ServiceDiscoveryEvent"/>s.
         /// </summary>
         [NotNull]
-        public string StreamName { get; set; } = "serviceDiscovery_event";
+        public string StreamName { get; }
     }
 }
