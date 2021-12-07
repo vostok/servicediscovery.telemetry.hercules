@@ -10,9 +10,6 @@
     <VersionPrefix>0.0.1</VersionPrefix>
   </PropertyGroup>
   <PropertyGroup>
-    <DotnetCementRefsUsePrereleaseForPrefixes>Vostok.ServiceDiscovery.Telemetry</DotnetCementRefsUsePrereleaseForPrefixes>
-  </PropertyGroup>
-  <PropertyGroup>
     <Title>Vostok.ServiceDiscovery.Telemetry.Hercules</Title>
     <Description>
     </Description>
