@@ -11,17 +11,17 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender
     /// An implementation of <see cref="IServiceDiscoveryEventsSender"/> that saves incoming events as <see cref="HerculesEvent"/>s using an instance of <see cref="IHerculesSink"/>.
     /// </summary>
     [PublicAPI]
-    public class HerculesServiceDiscoveryEventSender : IServiceDiscoveryEventsSender
+    public class HerculesServiceDiscoveryEventsSender : IServiceDiscoveryEventsSender
     {
-        private readonly HerculesServiceDiscoveryEventSenderSettings settings;
+        private readonly HerculesServiceDiscoveryEventsSenderSettings settings;
 
-        public HerculesServiceDiscoveryEventSender([NotNull] HerculesServiceDiscoveryEventSenderSettings settings)
+        public HerculesServiceDiscoveryEventsSender([NotNull] HerculesServiceDiscoveryEventsSenderSettings settings)
         {
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
         public void Send(ServiceDiscoveryEvent serviceDiscoveryEvent) =>
             settings.HerculesSink.Put(settings.StreamName,
-                builder => HerculesServiceDiscoveryEventBuilder.Build(serviceDiscoveryEvent, builder));
+                builder => HerculesServiceDiscoveryEventsBuilder.Build(serviceDiscoveryEvent, builder));
     }
 }

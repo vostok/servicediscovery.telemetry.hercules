@@ -14,26 +14,26 @@ using Vostok.ServiceDiscovery.Telemetry.Event;
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
 {
     /// <summary>
-    /// <para><see cref="HerculesServiceDiscoveryEventReader"/> that allows you to read events
-    /// using the <see cref="IHerculesStreamClient"/> transmitted in the <see cref="HerculesServiceDiscoveryEventReaderSettings"/>.</para>
-    /// <para>Reading events starts from the <see cref="HerculesServiceDiscoveryEventReaderSettings.Coordinates"/>, subsequent readings automatically move the coordinates.</para>
+    /// <para><see cref="HerculesServiceDiscoveryEventsReader"/> that allows you to read events
+    /// using the <see cref="IHerculesStreamClient"/> transmitted in the <see cref="HerculesServiceDiscoveryEventReadersSettings"/>.</para>
+    /// <para>Reading events starts from the <see cref="HerculesServiceDiscoveryEventReadersSettings.Coordinates"/>, subsequent readings automatically move the coordinates.</para>
     /// </summary>
     [PublicAPI]
-    public class HerculesServiceDiscoveryEventReader
+    public class HerculesServiceDiscoveryEventsReader
     {
         private StreamCoordinates coordinates;
-        private readonly HerculesServiceDiscoveryEventReaderSettings settings;
+        private readonly HerculesServiceDiscoveryEventReadersSettings settings;
         private readonly ILog log;
 
-        public HerculesServiceDiscoveryEventReader([NotNull] HerculesServiceDiscoveryEventReaderSettings settings, [CanBeNull] ILog log = null)
+        public HerculesServiceDiscoveryEventsReader([NotNull] HerculesServiceDiscoveryEventReadersSettings settings, [CanBeNull] ILog log = null)
         {
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            this.log = (log ?? LogProvider.Get()).ForContext<HerculesServiceDiscoveryEventReader>();
+            this.log = (log ?? LogProvider.Get()).ForContext<HerculesServiceDiscoveryEventsReader>();
             coordinates = this.settings.Coordinates;
         }
 
         /// <summary>
-        /// <para>Reads <see cref="ServiceDiscoveryEvent"/>s using the <see cref="HerculesServiceDiscoveryEventReaderSettings.HerculesStreamClient"/>.
+        /// <para>Reads <see cref="ServiceDiscoveryEvent"/>s using the <see cref="HerculesServiceDiscoveryEventReadersSettings.HerculesStreamClient"/>.
         /// See <see cref="IHerculesStreamClient.ReadAsync"/> for details.</para>
         /// <para>Return <b>Null</b> if reading unsuccessful (<see cref="HerculesStatus"/>).</para>
         /// </summary>
@@ -52,7 +52,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventReader
             }
 
             coordinates = readResult.Payload.Next;
-            return readResult.Payload.Events.Select(herculesEvent => HerculesServiceDiscoveryEventFactory.From(herculesEvent)).ToList();
+            return readResult.Payload.Events.Select(herculesEvent => HerculesServiceDiscoveryEventsFactory.From(herculesEvent)).ToList();
         }
     }
 }

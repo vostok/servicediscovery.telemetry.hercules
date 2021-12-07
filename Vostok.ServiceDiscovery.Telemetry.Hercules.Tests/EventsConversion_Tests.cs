@@ -25,7 +25,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
         {
             var herculesTagKeys = typeof(TagNames).GetFields().Select(info => (string)info.GetValue(null)).ToArray();
 
-            var herculesEvent = HerculesServiceDiscoveryEventFactory.To(serviceDiscoveryEvent);
+            var herculesEvent = HerculesServiceDiscoveryEventsFactory.To(serviceDiscoveryEvent);
 
             herculesEvent.Timestamp.Should().Be(Timestamp);
             herculesEvent.Tags.Keys.Should().BeEquivalentTo(herculesTagKeys);
@@ -35,8 +35,8 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
         [Test]
         public void Should_correctly_convert_from_hercules_event()
         {
-            var herculesEvent = HerculesServiceDiscoveryEventFactory.To(serviceDiscoveryEvent);
-            var parsedEvent = HerculesServiceDiscoveryEventFactory.From(herculesEvent);
+            var herculesEvent = HerculesServiceDiscoveryEventsFactory.To(serviceDiscoveryEvent);
+            var parsedEvent = HerculesServiceDiscoveryEventsFactory.From(herculesEvent);
 
             parsedEvent.Should().BeEquivalentTo(serviceDiscoveryEvent);
         }

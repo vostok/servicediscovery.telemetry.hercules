@@ -6,12 +6,12 @@ using Vostok.ServiceDiscovery.Telemetry.Event;
 namespace Vostok.ServiceDiscovery.Telemetry.Hercules.EventSender
 {
     /// <summary>
-    /// Represents configuration of <see cref="HerculesServiceDiscoveryEventSender"/>.
+    /// Represents configuration of <see cref="HerculesServiceDiscoveryEventsSender"/>.
     /// </summary>
     [PublicAPI]
-    public class HerculesServiceDiscoveryEventSenderSettings
+    public class HerculesServiceDiscoveryEventsSenderSettings
     {
-        public HerculesServiceDiscoveryEventSenderSettings([NotNull] IHerculesSink herculesSink) =>
+        public HerculesServiceDiscoveryEventsSenderSettings([NotNull] IHerculesSink herculesSink) =>
             HerculesSink = herculesSink ?? throw new ArgumentNullException(nameof(herculesSink));
 
         /// <summary>
