@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\vostok.devtools\library-common-props\Test-Project.props" />
   <Import Project="..\..\vostok.devtools\git-commit-to-assembly-title\Vostok.Tools.GitCommit2AssemblyTitle.props" />
@@ -17,5 +18,14 @@
   <ItemGroup>
     <ProjectReference Include="..\Vostok.ServiceDiscovery.Telemetry.Hercules\Vostok.ServiceDiscovery.Telemetry.Hercules.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Reference Include="Vostok.Hercules.Client.Abstractions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vostok.hercules.client.abstractions\Vostok.Hercules.Client.Abstractions\bin\Release\$(ReferencesFramework)\Vostok.Hercules.Client.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Vostok.ServiceDiscovery.Telemetry">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vostok.servicediscovery.telemetry\Vostok.ServiceDiscovery.Telemetry\bin\Release\$(ReferencesFramework)\Vostok.ServiceDiscovery.Telemetry.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
