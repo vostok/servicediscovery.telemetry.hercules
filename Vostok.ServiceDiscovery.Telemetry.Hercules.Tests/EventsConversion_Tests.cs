@@ -44,7 +44,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules.Tests
         {
             HerculesServiceDiscoveryEventsBuilder.Build(serviceDiscoveryEvent, builder);
             var herculesEvent = builder.BuildEvent();
-            var parsedEvent = HerculesServiceDiscoveryEventsFactory.From(herculesEvent);
+            var parsedEvent = HerculesServiceDiscoveryEventsFactory.CreateFrom(herculesEvent);
 
             parsedEvent.Should().BeEquivalentTo(serviceDiscoveryEvent);
         }
