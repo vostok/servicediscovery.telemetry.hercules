@@ -13,7 +13,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
     public static class HerculesServiceDiscoveryEventsFactory
     {
         [NotNull]
-        public static ServiceDiscoveryEvent From([NotNull] HerculesEvent herculesEvent)
+        public static ServiceDiscoveryEvent CreateFrom([NotNull] HerculesEvent herculesEvent)
         {
             if (!Enum.TryParse<ServiceDiscoveryEventKind>(herculesEvent.Tags[TagNames.Kind]?.AsString, out var kind))
                 throw new ArgumentException(nameof(TagNames.Kind));
