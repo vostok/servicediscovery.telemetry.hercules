@@ -26,7 +26,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Hercules
                 herculesEvent.Tags[TagNames.Environment]?.AsString ?? throw new ArgumentException(nameof(TagNames.Environment)),
                 herculesEvent.Tags[TagNames.Application]?.AsString ?? throw new ArgumentException(nameof(TagNames.Application)),
                 herculesEvent.Tags[TagNames.Replica]?.AsString ?? throw new ArgumentException(nameof(TagNames.Replica)),
-                herculesEvent.Timestamp,
+                herculesEvent.Timestamp.ToUniversalTime(),
                 properties ?? throw new ArgumentException(nameof(TagNames.Properties)));
         }
     }
