@@ -12,6 +12,16 @@ notests *default:
 
   install:
     - Vostok.ServiceDiscovery.Telemetry.Hercules/bin/Release/netstandard2.0/Vostok.ServiceDiscovery.Telemetry.Hercules.dll
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.ServiceDiscovery.Telemetry.Hercules/bin/Release/netstandard2.0/Vostok.ServiceDiscovery.Telemetry.Hercules.dll
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.ServiceDiscovery.Telemetry.Hercules/bin/Release/net6.0/Vostok.ServiceDiscovery.Telemetry.Hercules.dll
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.ServiceDiscovery.Telemetry.Hercules/bin/Release/net8.0/Vostok.ServiceDiscovery.Telemetry.Hercules.dll
 
 full-build > notests:
   deps:
